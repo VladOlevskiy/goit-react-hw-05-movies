@@ -1,17 +1,16 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { Section, ListItem, LinkItem } from './Movies-styled';
-import Searchbar from '../../components/Searchbar/Searchbar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Api from '../../services/API';
-import { Link } from 'react-router-dom';
 
-export const Movies = () => {
+const Searchbar = lazy(() => import('../../components/Searchbar/Searchbar'));
+
+const Movies = () => {
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') ?? '';
+  let query = searchParams.get('query') ?? '';
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     if (query === '') {
@@ -21,6 +20,13 @@ export const Movies = () => {
       try {
         const movieDetailsById = (await Api.getFilmsBySearchQuery(query))
           .results;
+        if (movieDetailsById.length === 0) {
+          alert(
+            'Sorry, there are no movies matching your search query. Please try again'
+          );
+          setSearchParams('');
+          return;
+        }
         setFilms(movieDetailsById);
       } catch (error) {
         throw new Error(error);
@@ -28,14 +34,13 @@ export const Movies = () => {
       }
     }
     getFilmByQuery();
-  }, [query]);
+  }, [query, setSearchParams]);
 
   const onSubmit = values => {
     if (values.searchQuery === '') {
-      console.log('Enter something');
+      alert('Enter something');
       return;
     }
-    console.log(values.searchQuery);
     setSearchParams(
       values.searchQuery !== '' ? { query: values.searchQuery } : {}
     );
@@ -57,3 +62,5 @@ export const Movies = () => {
     </Section>
   );
 };
+
+export default Movies;

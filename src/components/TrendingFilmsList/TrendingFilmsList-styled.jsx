@@ -5,6 +5,10 @@ export const ListItem = styled.li`
   margin-bottom: 15px;
   list-style: none;
   color: black;
+  transition: scale 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    scale: 1.01;
+  }
 `;
 
 export const LinkItem = styled(Link)`

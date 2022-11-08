@@ -5,7 +5,8 @@ export const Title = styled.h1`
 `;
 
 export const Section = styled.section`
-  padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   padding-right: 16px;
   padding-left: 16px;
 `;

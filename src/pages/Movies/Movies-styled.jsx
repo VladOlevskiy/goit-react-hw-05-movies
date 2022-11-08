@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Section = styled.section`
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   padding-right: 16px;
   padding-left: 16px;
 `;
@@ -11,6 +12,10 @@ export const ListItem = styled.li`
   margin-bottom: 15px;
   list-style: none;
   color: black;
+  transition: scale 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    scale: 1.01;
+  }
 `;
 
 export const LinkItem = styled(Link)`

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Circles } from 'react-loader-spinner';
 import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import defaultImg from '../../image/no-image.jpg';
 
 import {
   Container,
@@ -30,9 +31,6 @@ const MovieDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (movieDetails === []) {
-      return;
-    }
     async function getFilmById() {
       setLoader(false);
       try {
@@ -55,7 +53,17 @@ const MovieDetails = () => {
       {loader === true ? (
         <Container>
           <LinkToBack to={backLinkHref}>BACK</LinkToBack>
-          <Img src={mainImglink} alt="id" width="300px"></Img>
+          {movieDetails.poster_path ? (
+            <Img src={mainImglink} alt="id" width="300px"></Img>
+          ) : (
+            <img
+              src={defaultImg}
+              alt="no-images here"
+              width="150px"
+              height="225px"
+            />
+          )}
+
           <div>
             <MaineTitle>{movieDetails.title}</MaineTitle>
             <Text>

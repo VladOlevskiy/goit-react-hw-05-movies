@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Api from 'services/API';
 import React, { useState, useEffect } from 'react';
@@ -8,7 +8,6 @@ import { CastListItem } from './Cast-styled';
 const Cast = () => {
   const [movieCast, setMovieCast] = useState([]);
   const { id } = useParams();
-  const location = useLocation();
 
   useEffect(() => {
     async function getCastById() {
@@ -33,25 +32,29 @@ const Cast = () => {
   return (
     <>
       <ul>
-        {movieCast.map(film => {
-          let src = 'https://image.tmdb.org/t/p/w500/' + film.image;
-          return (
-            <CastListItem key={film.id}>
-              {film.image ? (
-                <img src={src} alt="" width="150px" height="225px" />
-              ) : (
-                <img
-                  src={defaultImg}
-                  alt="no-images here"
-                  width="150px"
-                  height="225px"
-                />
-              )}
-              <p>{film.name}</p>
-              <p>Character: {film.character}</p>
-            </CastListItem>
-          );
-        })}
+        {movieCast.length > 0 ? (
+          movieCast.map(film => {
+            let src = 'https://image.tmdb.org/t/p/w500/' + film.image;
+            return (
+              <CastListItem key={film.id}>
+                {film.image ? (
+                  <img src={src} alt="" width="150px" height="225px" />
+                ) : (
+                  <img
+                    src={defaultImg}
+                    alt="no-images here"
+                    width="150px"
+                    height="225px"
+                  />
+                )}
+                <p>{film.name}</p>
+                <p>Character: {film.character}</p>
+              </CastListItem>
+            );
+          })
+        ) : (
+          <p>There is no info about cast </p>
+        )}
       </ul>
     </>
   );
