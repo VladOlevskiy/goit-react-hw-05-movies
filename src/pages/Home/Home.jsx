@@ -1,12 +1,12 @@
 import TrendingFilmsList from 'components/TrendingFilmsList/TrendingFilmsList';
 import { Title, Section } from './Home-styled';
 
-const Home = ({ trendingFilms }) => {
+const Home = () => {
   return (
     <Section>
       <Title>Trending today</Title>
       <ul>
-        <TrendingFilmsList trendingFilms={trendingFilms} />
+        <TrendingFilmsList />
       </ul>
     </Section>
   );

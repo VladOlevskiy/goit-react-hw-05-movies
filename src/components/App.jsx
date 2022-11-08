@@ -1,8 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from './SharedLayout/SharedLayout';
-import Api from '../services/API';
-import React, { useState } from 'react';
-import { useEffect, lazy } from 'react';
+import React from 'react';
+import { lazy } from 'react';
 
 const Movies = lazy(() => import('../pages/Movies/Movies'));
 const Home = lazy(() => import('../pages/Home/Home'));
@@ -11,32 +10,11 @@ const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
-  const [trendingFilms, setTrendingFilms] = useState([]);
-
-  useEffect(() => {
-    async function getFilm() {
-      try {
-        const trendingFilm = (await Api.getTrendingFilms()).results;
-        const filterDateOfImages = trendingFilm.map(film => {
-          return {
-            id: film.id,
-            title: film.title,
-          };
-        });
-        setTrendingFilms(filterDateOfImages);
-      } catch (error) {
-        throw new Error(error);
-      } finally {
-      }
-    }
-    getFilm();
-  }, []);
-
   return (
     <div>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home trendingFilms={trendingFilms} />} />
+          <Route index element={<Home />} />
           <Route path="movies/:id" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />{' '}

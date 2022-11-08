@@ -1,6 +1,7 @@
 import React from 'react';
-import { Formik, Field } from 'formik';
-import { Label, Button, Form } from './Searchbar-styled';
+import { Formik } from 'formik';
+import { Label, Button, Form, Field } from './Searchbar-styled';
+import PropTypes from 'prop-types';
 
 const initialValues = {
   searchQuery: '',
@@ -25,6 +26,10 @@ const Searchbar = ({ onSubmit }) => {
       </Form>
     </Formik>
   );
+};
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Searchbar;

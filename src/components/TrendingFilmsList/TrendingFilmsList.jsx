@@ -1,8 +1,30 @@
 import { ListItem, LinkItem } from './TrendingFilmsList-styled';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Api from '../../services/API';
 
-const TrendingFilmsList = ({ trendingFilms }) => {
+const TrendingFilmsList = () => {
   const location = useLocation();
+  const [trendingFilms, setTrendingFilms] = useState([]);
+
+  useEffect(() => {
+    async function getFilm() {
+      try {
+        const trendingFilm = (await Api.getTrendingFilms()).results;
+        const filterDateOfImages = trendingFilm.map(film => {
+          return {
+            id: film.id,
+            title: film.title,
+          };
+        });
+        setTrendingFilms(filterDateOfImages);
+      } catch (error) {
+        throw new Error(error);
+      } finally {
+      }
+    }
+    getFilm();
+  }, []);
 
   return (
     <>

@@ -51,36 +51,40 @@ const MovieDetails = () => {
   return (
     <Section>
       {loader === true ? (
-        <Container>
+        <>
           <LinkToBack to={backLinkHref}>BACK</LinkToBack>
-          {movieDetails.poster_path ? (
-            <Img src={mainImglink} alt="id" width="300px"></Img>
-          ) : (
-            <img
-              src={defaultImg}
-              alt="no-images here"
-              width="150px"
-              height="225px"
-            />
-          )}
+          <Container>
+            {movieDetails.poster_path ? (
+              <Img src={mainImglink} alt="id" width="300px"></Img>
+            ) : (
+              <img
+                src={defaultImg}
+                alt="no-images here"
+                width="150px"
+                height="225px"
+              />
+            )}
 
-          <div>
-            <MaineTitle>{movieDetails.title}</MaineTitle>
-            <Text>
-              User Score: {Math.round(movieDetails.vote_average * 10)}%
-            </Text>
-            <Title>Overview</Title>
-            <Text>{movieDetails.overview}</Text>
-            <Title>Genres</Title>
-            <GenresList>
-              {movieDetails.genres.map(genre => {
-                return (
-                  <GenresListItem key={genre.name}>{genre.name}</GenresListItem>
-                );
-              })}
-            </GenresList>
-          </div>
-        </Container>
+            <div>
+              <MaineTitle>{movieDetails.title}</MaineTitle>
+              <Text>
+                User Score: {Math.round(movieDetails.vote_average * 10)}%
+              </Text>
+              <Title>Overview</Title>
+              <Text>{movieDetails.overview}</Text>
+              <Title>Genres</Title>
+              <GenresList>
+                {movieDetails.genres.map(genre => {
+                  return (
+                    <GenresListItem key={genre.name}>
+                      {genre.name}
+                    </GenresListItem>
+                  );
+                })}
+              </GenresList>
+            </div>
+          </Container>
+        </>
       ) : (
         <Circles
           height="80"

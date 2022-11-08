@@ -1,9 +1,24 @@
 import styled from 'styled-components';
-import { Form as FormFormik } from 'formik';
+import { Form as FormFormik, Field as FieldFormik } from 'formik';
 
 export const Form = styled(FormFormik)`
+  width: 250px;
   display: flex;
+  align-items: center;
   margin-bottom: 20px;
+`;
+export const Field = styled(FieldFormik)`
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  transition: 0.4s box-shadow;
+  &:focus {
+    background-color: lightblue;
+  }
+  :hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 export const Label = styled.span`
