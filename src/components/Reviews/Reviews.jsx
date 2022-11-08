@@ -1,11 +1,13 @@
 import Api from 'services/API';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { ReviewsListItem, ReviewsTitle } from './Reviews-styled';
 
 const Reviews = () => {
   const [movieReviews, setMovieReviews] = useState([]);
   const { id } = useParams();
+  const location = useLocation();
+
   useEffect(() => {
     async function getByReviewsId() {
       try {
@@ -17,7 +19,6 @@ const Reviews = () => {
             id: film.id,
           };
         });
-        console.log(filteredReviewsById);
         setMovieReviews(filteredReviewsById);
       } catch (error) {
         throw new Error(error);

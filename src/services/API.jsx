@@ -43,11 +43,21 @@ ${API_URL}movie/${id}/reviews?api_key=${API_KEY}`);
   }
 };
 
-// https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+const getFilmsBySearchQuery = async searchQuery => {
+  try {
+    const response = await axios.get(`
+${API_URL}search/movie?api_key=${API_KEY}&query=${searchQuery}&page=1`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const Api = {
   getTrendingFilms,
   getDetailsById,
   getCastById,
   getReviewsById,
+  getFilmsBySearchQuery,
 };
 export default Api;

@@ -1,7 +1,24 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 export const AdditionalLinkItem = styled(NavLink)`
+  color: black;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  &:hover,
+  &:focus {
+    color: orangered;
+  }
+  &.active {
+    color: white;
+    background-color: orangered;
+  }
+`;
+
+export const LinkToBack = styled(Link)`
   color: black;
   padding: 8px 16px;
   border-radius: 4px;

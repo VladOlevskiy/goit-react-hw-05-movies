@@ -36,11 +36,11 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home trendingFilms={trendingFilms} />} />
-          <Route path="/movies" element={<Movies />} />
           <Route path="movies/:id" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />{' '}
           </Route>
+          <Route path="/movies" element={<Movies />} />
           <Route path="*" element={<h1>NotFound</h1>} />
         </Route>
       </Routes>

@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+
 import Api from 'services/API';
 import React, { useState, useEffect } from 'react';
 import defaultImg from '../../image/no-image.jpg';
@@ -7,6 +8,7 @@ import { CastListItem } from './Cast-styled';
 const Cast = () => {
   const [movieCast, setMovieCast] = useState([]);
   const { id } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     async function getCastById() {
